@@ -34,6 +34,9 @@ export class MessageSenderComponent {
         if (this.checkIsThisURL(element.content)) {
           element.ifURL = true;
           return element;
+        } else if (this.checkIsThisImage(element.content)) {
+          element.isThisImage = true;
+          return element;
         } else {
           return element;
         }
@@ -43,7 +46,7 @@ export class MessageSenderComponent {
       .subscribe(this.formSubmit);
   }
 
-  private checkIsThisURL(element: string):boolean {
+  checkIsThisURL(element: string):boolean {
     let isThisURL: boolean = false;
     const expression: any = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
     let regex = new RegExp(expression);
@@ -52,7 +55,22 @@ export class MessageSenderComponent {
       isThisURL = true;
     }
     
-    console.log(isThisURL);
+    console.log('URL: ' + isThisURL);
     return isThisURL;
   }
+
+  checkIsThisImage(element: string):boolean {
+    let isThisImage: boolean = false;
+    const expression: any = /(https?:\/\/.*\.(?:png|jpg))/i;
+    let regex = new RegExp(expression);
+
+    if(element.match(regex)) {
+      isThisImage = true;
+    }
+
+    console.log('IMAGE: '+ isThisImage);
+    return isThisImage;
+  }
+
+
 }
