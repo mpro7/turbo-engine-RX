@@ -16,6 +16,9 @@ export class MessageSenderComponent {
   @Output() formSubmit = new EventEmitter();
   formSubmitSubject = new Subject();
 
+  public thisIsImage: boolean = false;
+  public thisIsURL: boolean = false;
+
   constructor(private formBuilder: FormBuilder) { }
   
   ngOnInit() {
@@ -31,11 +34,13 @@ export class MessageSenderComponent {
       .filter(() => this.form.valid)
       .map(() => this.form.value)
       .map(element => {
-        if (this.checkIsThisURL(element.content)) {
-          element.ifURL = true;
-          return element;
-        } else if (this.checkIsThisImage(element.content)) {
+        if (this.checkIsThisImage(element.content)) {
           element.isThisImage = true;
+          this.thisIsImage = true
+          return element;
+        } else if (this.checkIsThisURL(element.content)) {
+          element.isThisURL = true;
+          this.thisIsURL = true;
           return element;
         } else {
           return element;
