@@ -1,7 +1,19 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.name}}
-  </li>
-</ul>
 
+
+<div class="list-messages" id="listMessages">
+  <ul>
+    <li class="text" *ngFor="let message of messages | async">
+
+      {{message.time}}
+      <b>{{message.name}}</b>
+      : {{message.content}}
+
+    </li>
+  </ul>
+</div>
+
+<div class="new-message" id="newMessage">
+  <input type="text" name="name" placeholder="name..">
+  <input type="text" name="text" placeholder="text..">
+</div>
