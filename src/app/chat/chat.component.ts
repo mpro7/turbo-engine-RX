@@ -21,7 +21,7 @@ export class ChatComponent implements OnInit {
 
   formMessageSender(event: any){
     this.db.collection('Chat').add({
-        'time' : event.time,
+//        'time' : event.time,
         'name' : event.name,
         'content' : event.content
     });
