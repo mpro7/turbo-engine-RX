@@ -3,12 +3,15 @@ import { Subject } from 'rxjs/Subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControlName } from '@angular/forms';
 import { element } from 'protractor';
+
 @Component({
   selector: 'app-message-sender',
   templateUrl: './message-sender.component.html',
   styleUrls: ['./message-sender.component.css']
 })
+
 export class MessageSenderComponent {
+  
   @Input() public submitButtonText = 'Submit';
   public form: FormGroup;
 //  public currentTime = new Date();
@@ -18,6 +21,7 @@ export class MessageSenderComponent {
 
   public thisIsImage: boolean = false;
   public thisIsURL: boolean = false;
+  public multimediaContent: string;
 
   constructor(private formBuilder: FormBuilder) { }
   
@@ -33,24 +37,9 @@ export class MessageSenderComponent {
     this.formSubmitSubject
       .filter(() => this.form.valid)
       .map(() => this.form.value)
-      .map(element => {
-        if (this.checkIsThisImage(element.content)) {
-          element.isThisImage = true;
-          this.thisIsImage = true
-          return element;
-        } else if (this.checkIsThisURL(element.content)) {
-          element.isThisURL = true;
-          this.thisIsURL = true;
-          return element;
-        } else {
-          return element;
-        }
-      }
-
-      )
       .subscribe(this.formSubmit);
   }
-
+/*
   checkIsThisURL(element: string):boolean {
     let isThisURL: boolean = false;
     const expression: any = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
@@ -77,5 +66,5 @@ export class MessageSenderComponent {
     return isThisImage;
   }
 
-
+*/
 }

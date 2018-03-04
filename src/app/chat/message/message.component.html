@@ -1,1 +1,9 @@
-<b>{{message.name}}</b> : {{message.content}}
+<span><b>{{message.name}}</b> :</span>
+<span *ngIf="thisIsImage==false && thisIsURL==false">{{message.content}}</span>
+
+<!--
+<span *ngIf="thisIsImage==true"><img src="{{message.content}}"></span>
+-->
+
+ 
+
